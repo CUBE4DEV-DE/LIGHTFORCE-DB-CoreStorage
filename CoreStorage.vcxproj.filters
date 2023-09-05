@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="File">
+      <UniqueIdentifier>{9ba1d0de-3e95-471f-abbb-e87d37f8ef80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Directory">
+      <UniqueIdentifier>{90c03f97-76b1-47b0-8ab2-261a8012ce92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Container">
+      <UniqueIdentifier>{ae940660-3fbd-4e7d-bd5f-66b84cfcb1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inject">
+      <UniqueIdentifier>{9f212254-1ed8-482b-a5af-a5a3cebec4cb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CoreStorageGlobal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClCompile Include="CoreStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="CoreStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XFile.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="XFileBlock.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="XFileCache.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="XDirectory.h">
+      <Filter>Directory</Filter>
+    </ClInclude>
+    <ClInclude Include="XCompress.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="XCrypt.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="XFileAlias.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="XConfig.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="XFunctionInject.h">
+      <Filter>Inject</Filter>
+    </ClInclude>
+    <ClInclude Include="XLogInject.h">
+      <Filter>Inject</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="XFileCache.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="XFileBlock.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="XFile.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="XDirectory.cpp">
+      <Filter>Directory</Filter>
+    </ClCompile>
+    <ClCompile Include="XBackup.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="XCrypt.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="XCompress.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="XRepository.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="XFileAlias.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="XStream.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="XMetaFile.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="XSecret.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="XConfig.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="XExpire.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="XFunctionInject.cpp">
+      <Filter>Inject</Filter>
+    </ClCompile>
+    <ClCompile Include="XLogInject.cpp">
+      <Filter>Inject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="XRepository.h">
+      <Filter>Container</Filter>
+    </QtMoc>
+    <QtMoc Include="XBackup.h">
+      <Filter>Container</Filter>
+    </QtMoc>
+    <QtMoc Include="XStream.h">
+      <Filter>Container</Filter>
+    </QtMoc>
+    <QtMoc Include="XMetaFile.h">
+      <Filter>File</Filter>
+    </QtMoc>
+    <QtMoc Include="XSecret.h">
+      <Filter>Container</Filter>
+    </QtMoc>
+    <QtMoc Include="XExpire.h">
+      <Filter>Container</Filter>
+    </QtMoc>
+  </ItemGroup>
+</Project>
