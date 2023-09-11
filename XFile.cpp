@@ -34,6 +34,12 @@ QList<QFuture<void> > XFile::m_Futures;
 // Method:  alias
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
+
+// This C++ function, named "alias", is a member of the "XFile" class.It takes a 
+// "filename" parameter as a QString reference and simply returns the result of the
+// "alias" method from the "XFileAlias" class, which is called with the same 
+// "filename" parameter.
+
 QString XFile::alias(const QString& filename)
 {
 	return XFileAlias::alias(filename);
@@ -50,8 +56,18 @@ QString XFile::alias(const QString& filename)
 // Params:  const QString& filename
 // Params:  const QString& alias
 //----------------------------------------------------------------------------- 
+
+// This "alias" method is part of the "XFile" class and takes two QString references 
+// as parameters : "filename" and "alias".Initially,  it checks if both strings are empty,
+// and if so, invokes the "clear" method from the "XFileAlias" class,
+// potentially clearing all aliases.If only "filename" is empty, it again calls the "clear" method,
+// this time with the "alias" parameter, possibly to remove a specific alias.Finally,
+// if both strings are not empty, it calls the "insert" method of the "XFileAlias" 
+// class to create or update an alias with the provided "alias" and "filename".
+
 void XFile::alias(const QString& filename, const QString& alias)
 {
+
 	if (filename.isEmpty()&&alias.isEmpty())
 		XFileAlias::clear();
 	else if (filename.isEmpty())
@@ -70,6 +86,17 @@ void XFile::alias(const QString& filename, const QString& alias)
 // Method:  readFile
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
+
+// This "read" function, part of the "XFile" class, takes a filename as an input
+// parameter and attempts to read the content of the file with that name. Initially,
+// it checks if a trace for "FILE" is active using "XInject::isTrace", logging 
+// a trace message if true. Then, it tries to open and read the specified file,
+// logging a warning and returning an empty QString if the file cannot be opened
+// or if any other error occurs during the read operation. If the file is successfully opened
+// , it reads the entire content using a QTextStream and returns it as a QString.
+// Throughout the function, it uses an "alias" method to possibly resolve the filename 
+// to an alias before accessing the file, and "FileNameJSON" method to 
+// format the filename for logging.
 
 QString XFile::read(const QString& filename)
 {
@@ -112,6 +139,13 @@ QString XFile::read(const QString& filename)
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
 
+// This function, named "readCache", is part of the "XFile" class and takes a
+// "filename" parameter as a QString reference. Initially, it checks if a trace
+// for "FILE" is active using "XInject::isTrace", and if true, logs a trace message.
+// Then, it calls the "read" method from the "XFileCache" class, passing an alias
+// of the "filename" (resolved through the "alias" method of the "XFile" class) 
+// as the parameter, and returns its result.
+
 const QString& XFile::readCache(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -133,6 +167,24 @@ const QString& XFile::readCache(const QString& filename)
 // Params:  const QString& content
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method `XFile::write` in C++ that takes three
+// parameters: a filename (as a QString), content (as a QString), and a 
+// boolean flag named "run". The method first checks if a trace for "FILE" 
+// is active using the `XInject::isTrace` method and logs a message if it is. 
+// Next, based on the value of the "run" parameter, it writes the content to 
+// the specified file in two different ways : 
+
+// 1. If "run" is true, it starts a concurrent operation(potentially running 
+// in a separate thread) to write the content to the file.It tries to create 
+// necessary paths and open the file for writing, logging a warning message 
+// if any of these operations fail.It writes the content to the file using 
+// a QTextStream, which is set to automatically detect Unicode encoding.
+
+// 2. If "run" is false, it performs a similar series of operations but within
+//  the main thread, returning true if the write operation was successful and 
+// false otherwise, logging a warning message if the operation fails at any step.
+
 bool XFile::write(const QString& filename, const QString& content, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -213,6 +265,32 @@ bool XFile::write(const QString& filename, const QString& content, bool run)
 // Params:  const QString& content
 // Params:  bool run
 //----------------------------------------------------------------------------- 
+
+// This script defines a method named `append` within the `XFile` class that
+// takes four arguments: a filename (as a QString), content (as a QString), 
+// a boolean named "run", and a boolean named "ignorelog".
+// 
+// 1. Initially, it checks whether a trace is active for "FILE" using 
+// `XInject::isTrace("FILE")` and if "ignorelog" is false.
+// If so, it logs a trace message using `X_LOGJSON`.
+// 
+// 2. Then, the script checks the "run" argument.If "run" is true,
+// it executes a concurrent block where it attempts to append the provided
+// "content" to the file specified by "filename" in a separate thread.
+// During this process, it creates an `XFileBlock` and opens the file in append mode,
+// then writes the "content" to it using a `QTextStream`. If it encounters any 
+// errors(either in opening the file or during the write operation), and "ignorelog" 
+// is false, it logs a warning message using `X_WARNINGJSON`. The concurrent
+// operation doesn't return any value.
+// 
+// 3. If "run" is false, the script executes a similar block of code but not
+// in a separate thread.It tries to append "content" to the file and logs
+// warning messages if necessary(same as in the concurrent block).It returns `true`
+// if the operation succeeds and `false` otherwise.
+
+// Throughout the code, a series of operations(such as aliasing the filename 
+// and creating the file path) are performed to manage the file before the 
+// writing operation.
 
 bool XFile::append(const QString& filename, const QString& content, bool run, bool ignorelog)
 {
@@ -307,6 +385,8 @@ bool XFile::append(const QString& filename, const QString& content, bool run, bo
 // Method:  readBinary
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
+
+
 QByteArray XFile::readBinary(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -1643,6 +1723,25 @@ void XFile::append(QFuture<void> future)
 // Params:  const QString& filename
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// This code defines a function named "mkFilePath" in the "XFile" class, which
+// takes a string parameter "filename" and returns a boolean value. 
+
+// It tries to create a file path using the given "filename" with the 
+// following steps :
+
+// 1. It retrieves file information using "alias(filename)" and stores it
+//  in the "info" object.
+
+// 2. It attempts to create a path using the "mkpath" method on a "QDir"
+//  object created with the path from the "info" object.
+
+// 3. If the path is successfully created, it returns true.
+
+// If any exception occurs during this process(caught by the catch block),
+// it logs a warning message with the "X_WARNINGJSON" macro, which includes
+// details like "CoreStorage", "XFile", "mkFilePath", and the filename.
+// In the case of an exception, it returns false.
 
 bool XFile::mkFilePath(const QString& filename)
 {
