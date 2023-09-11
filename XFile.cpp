@@ -1309,6 +1309,22 @@ bool XFile::exists(const QString& filename)
 // Params:  
 //----------------------------------------------------------------------------- 
 
+// This source code defines a method called "equal" in the "XFile" class that 
+// takes two filename strings as inputs and returns a boolean indicating 
+// whether the files are equal or not.Here is a brief summary of the code:
+
+// 1. It obtains file information(like size, last modified time, and 
+// creation time) for each file using their filenames.
+// 2. If the sizes of the two files are not equal, it returns `false`.
+// 3. If the sizes are equal, it then checks whether both the last modified
+//  time and the creation time are equal.If both are equal, it returns `true`.
+// 4. If the last modified and creation times are not equal, it then reads
+//  the binary data of both files and compares them.If the binary data is
+//  equal, it returns `true`; otherwise, it returns `false`.
+
+// This method, therefore, uses a multi-stage comparison process to check
+// whether the two files are equal, considering both file metadata and content.
+
 bool XFile::equal(const QString& filename, const QString& filename2)
 {
 	QFileInfo fileinfo(alias(filename));
@@ -1338,6 +1354,17 @@ bool XFile::equal(const QString& filename, const QString& filename2)
 // Params:  Qt::CaseSensitivity sensitivity
 //----------------------------------------------------------------------------- 
 
+// The given source code defines a function `contains` in the `XFile` class 
+// that takes three parameters : `filename` (a string indicating the file name),
+// `search` (a string representing the text to search for), and `sensitivity`
+// (a parameter that specifies the case sensitivity of the search operation).
+// It returns a boolean value indicating whether the text specified in the 
+// `search` parameter is found within the file specified by the `filename`
+// parameter.The search operation considers the case sensitivity parameter 
+// to conduct the search operation accordingly.The `contains` function 
+// leverages the `read` function from the same class (`XFile`) to read 
+// the file content before performing the search operation.
+
 bool XFile::contains(const QString& filename, const QString& search, Qt::CaseSensitivity sensitivity)
 {
 	return XFile::read(filename).contains(search, sensitivity);
@@ -1354,6 +1381,12 @@ bool XFile::contains(const QString& filename, const QString& search, Qt::CaseSen
 // Params:  const QRegularExpression& search
 //----------------------------------------------------------------------------- 
 
+// This C++ method, a member of the XFile class, takes two parameters: 
+// a filename (of type QString) and a regular expression (of type QRegularExpression).
+// It reads the content of the file specified by the filename and returns `true`
+// if the content contains a match for the regular expression pattern,
+// and `false` otherwise.
+
 bool XFile::contains(const QString& filename, const QRegularExpression& search)
 {
 	return XFile::read(filename).contains(search);
@@ -1369,6 +1402,33 @@ bool XFile::contains(const QString& filename, const QRegularExpression& search)
 // Params:  const QString& srcfilename
 // Params:  const QString& dstfilename
 //----------------------------------------------------------------------------- 
+
+// This C++ code defines a method in the `XFile` class named `compress` which 
+// takes three parameters : `srcfilename` (source file name), `dstfilename`
+// (destination file name), and a boolean `run`.
+
+// - Initially, it checks if the trace flag for "FILE" is active using 
+// `XInject::isTrace` and logs a trace message if true.
+// 
+// - It then checks if the source file exists using the `exists` method.
+// If the source file doesn't exist, it logs a warning message and returns false.
+// 
+// - If the `run` parameter is true, it attempts to compress the file concurrently,
+// where it reads the binary data from the source file, compresses it using
+// `qCompress`, and writes the compressed data to the destination file,
+// all in a separate thread.If any error occurs during this operation,
+// it logs a warning message.
+// 
+// - If the `run` parameter is false, it performs the same compressing operation
+// but not concurrently(i.e., in the same thread).It logs a warning message 
+// if an error occurs during this operation.
+// 
+// - The method returns true if the compression was initiated successfully(in case of concurrent operation)
+// or completed successfully(in case of non - concurrent operation), and false otherwise.
+
+// Note: The `writeBinary`, `qCompress`, and `readBinary` methods are being used for file operations, 
+// but their implementations are not shown in this code snippet.
+
 bool XFile::compress(const QString& srcfilename, const QString& dstfilename, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -1423,6 +1483,36 @@ bool XFile::compress(const QString& srcfilename, const QString& dstfilename, boo
 // Params:  const QString& dstfilename
 //----------------------------------------------------------------------------- 
 
+// This source code defines a method `unCompress` within the `XFile` class 
+// that attempts to uncompress a file. The method accepts three parameters: 
+// the source file name (`srcfilename`), the destination file name 
+// (`dstfilename`), and a boolean (`run`) to determine whether the 
+// operation should be performed concurrently.
+// Here is a step-by-step summary of what the code does :
+
+// 1. It first checks if the trace for the file is active using 
+// `XInject: : isTrace("FILE")`, and if true, logs a trace message 
+// using `X_LOGJSON`.
+
+// 2. Then, it checks whether the source file exists using the `exists` method.
+// If the file does not exist, it logs a warning message using `X_WARNINGJSON` 
+// and returns false.
+
+// 3. If the `run` parameter is true, it tries to uncompress the source file 
+// concurrently using a lambda function inside the `concurrent` method.
+// If any exception occurs during this process, it logs a warning message 
+// and continues.
+
+// 4. If the `run` parameter is false, it tries to uncompress the source 
+// file synchronously inside a try - catch block.If any exception occurs,
+// it logs a warning message and returns false.
+
+// 5. The uncompression is done using `qUncompress` method, reading from the 
+// source file and writing to the destination file using `readBinary` and 
+// `writeBinary` methods respectively.
+
+// The return type of the method is boolean, indicating the success(true) or failure(false) of the uncompression operation.
+
 bool XFile::unCompress(const QString& srcfilename, const QString& dstfilename, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -1476,6 +1566,12 @@ bool XFile::unCompress(const QString& srcfilename, const QString& dstfilename, b
 // Method:  compressFile
 // Params:  const QString& srcfilename
 //----------------------------------------------------------------------------- 
+
+// This code defines a method in the XFile class called "compress". 
+// It takes two parameters: "srcfilename" which is a QString and "run" which is a boolean.
+// It returns the result of calling a overloaded method with "srcfilename",
+// "srcfilename.z" (appending ".z" to the source filename), and "run" as arguments. 
+
 bool XFile::compress(const QString& srcfilename, bool run)
 {
 	return compress(srcfilename, srcfilename+QString(".z"),run);
@@ -1491,6 +1587,13 @@ bool XFile::compress(const QString& srcfilename, bool run)
 // Params:  const QString& srcfilename
 // Params:  
 //----------------------------------------------------------------------------- 
+// This code defines a method named `unCompress` within the `XFile` class that 
+// takes two parameters: `srcfilename` (a reference to a `QString`) and
+// `run` (a boolean). The method calls itself recursively with slightly
+// modified arguments - it removes the ".z" extension from `srcfilename`
+// and uses that as the second parameter run in the recursive call. 
+// It returns the result of this overloaded call. 
+
 bool XFile::unCompress(const QString& srcfilename, bool run)
 {
 	return unCompress(srcfilename , QString(srcfilename).remove(".z"),run);
@@ -1509,6 +1612,32 @@ bool XFile::unCompress(const QString& srcfilename, bool run)
 // Params:  bool run
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// The source code defines a `crypt` function in the `XFile` class that takes
+// in four parameters : the source filename(`srcfilename`), the destination
+// filename(`dstfilename`), a cryptographic key(`key`), and a boolean(`run`)
+// indicating whether the encryption should be performed concurrently or not.
+
+// 1. At the start of the function, if the "FILE" trace is enabled in the
+// `XInject` class, it logs the srcfilename and dstfilename as a JSON 
+// message with a trace status of "Ok".
+
+// 2. It then checks if the source file exists using the `exists` method.
+// If the source file does not exist, it logs a warning message with a 
+// status of "Missing" and returns false.
+
+// 3. If the `run` parameter is true, it performs the encryption concurrently
+// by calling a lambda function inside the `concurrent` function.This lambda
+// function tries to read the binary data from the source file, encrypt it 
+// using the given key with `XCrypt::crypt` method, and write the encrypted
+// data to the destination file.If any error occurs during this process, 
+// it logs a warning message with a status of "Failed".
+
+// 4. If the `run` parameter is false, it performs the encryption non - 
+// concurrently in a try - catch block, attempting the same read - encrypt - 
+// write process as in the concurrent branch but within the main thread.
+// If any exception is caught, it logs a warning message and returns false.
+// If the operation succeeds, it returns true.
 
 bool XFile::crypt(const QString& srcfilename, const QString& dstfilename, const QString& key, bool run)
 {
@@ -1564,6 +1693,33 @@ bool XFile::crypt(const QString& srcfilename, const QString& dstfilename, const 
 // Params:  bool run
 //----------------------------------------------------------------------------- 
 
+// This C++ code defines a method `XFile::unCrypt` which takes four parameters:
+// source file name (`srcfilename`), destination file name (`dstfilename`),
+// a key (`key`), and a boolean indicating whether to run concurrently (`run`).
+// The method attempts to decrypt a file and write the result to a destination file.
+
+// 1. Initially, it checks if tracing is enabled for "FILE" using 
+// `XInject::isTrace`, and if so, logs a trace message with some details using
+// `X_LOGJSON`.
+
+// 2. It then checks if the source file exists using the `exists` function.
+// If the file does not exist, it logs a warning message using `X_WARNINGJSON`
+// and returns false.
+
+// 3. If the `run` parameter is true, it attempts to decrypt the file 
+// concurrently using a lambda function which is passed to the `concurrent`
+// function.Inside the lambda, it reads the binary data from the source file,
+// decrypts it using the `XCrypt::unCrypt` function(with the given key), 
+// and writes the result to the destination file.If any exception occurs, 
+// it logs a warning message and the lambda function ends.
+
+// 4. If the `run` parameter is false, it performs the decryption in a similar
+// manner but in a synchronous way(not inside a lambda passed to `concurrent`).
+// If an exception occurs during this process, it logs a warning message and
+// returns false.
+
+// 5. If the decryption and writing to the destination file succeed, it returns true.
+
 bool XFile::unCrypt(const QString& srcfilename, const QString& dstfilename, const QString& key, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -1617,6 +1773,13 @@ bool XFile::unCrypt(const QString& srcfilename, const QString& dstfilename, cons
 // Method:  wait
 //----------------------------------------------------------------------------- 
 
+// This code defines a method named `wait` in the `XFile` class.Within the
+// method, it iterates over all the "future" objects stored in the
+// `m_Futures` container.For each "future", it calls the `waitForFinished()` 
+// method, which will block the execution until that particular "future" is 
+// finished.After iterating over all the "futures", it clears the
+// `m_Futures` container.
+
 void XFile::wait()
 {
 	for (auto future : m_Futures) 
@@ -1633,9 +1796,19 @@ void XFile::wait()
 // Context: DefaultNamespace
 // Class:   XFile
 // Method:  FileNameJSON
-// Params:  const QString& filename
-// Params:  
+// Params:  const QString& filename  
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method named `FileNameJSON` that belongs to the
+// `XFile` class.The method takes a QString parameter named `filename`
+// and returns a QJsonObject.Inside the method, a QString variable `aliasfilename`
+// is initialized by calling an `alias` function with `filename` as the argument.
+// Then, it checks whether `aliasfilename` is equal to `filename`. If they 
+// are equal, a key - value pair with the key "Filename" and the value as 
+// `filename` is added to the QJsonObject `obj`. If they are not equal, two 
+// key - value pairs are added to `obj`: one with the key "FilenameAlias" and 
+// the value `filename`, and another with the key "Filename" and the value 
+// `aliasfilename`. Finally, `obj` is returned.
 
 QJsonObject XFile::FileNameJSON(const QString& filename)
 {
@@ -1664,9 +1837,29 @@ QJsonObject XFile::FileNameJSON(const QString& filename)
 // Class:   XFile
 // Method:  FileNamesJSON
 // Params:  const QString& srcfilename
-// Params:  const QString& dstfilename
-// Params:  
+// Params:  const QString& dstfilename 
 //----------------------------------------------------------------------------- 
+
+// This is a function named `FileNamesJSON` in the `XFile` class.It accepts
+// two `QString` arguments : `srcfilename` and `dstfilename`. The function 
+// returns a `QJsonObject`.
+
+// Inside the function :
+
+// 1. A `QJsonObject` named `obj` is created.
+
+// 2. It computes aliases for `srcfilename` and `dstfilename` using
+//  a function named `alias`.
+
+// 3. If the alias of `srcfilename` is the same as `srcfilename`, it sets
+//  the `"SrcFilename"` key in the JSON object to `srcfilename`. If not,
+//  it sets `"SrcFilenameAlias"` to `srcfilename` and `"SrcFilename"` to the
+//  alias of `srcfilename`.
+
+// 4. Similarly, it does the same check for `dstfilename` and sets the
+//  `"DstFilename"` and `"DstFilenameAlias"` keys in the JSON object accordingly.
+
+// 5. Finally, it returns the JSON object.
 
 QJsonObject XFile::FileNamesJSON(const QString& srcfilename, const QString& dstfilename)
 {
