@@ -386,6 +386,26 @@ bool XFile::append(const QString& filename, const QString& content, bool run, bo
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
 
+//This source code defines a method named `readBinary` in the `XFile` class
+//  that reads binary data from a file specified by the "filename" parameter
+//  and returns it as a `QByteArray`. 
+
+// Here is a brief summary in English :
+
+// 1. A log trace is created if "FILE" tracing is enabled, logging the filename in JSON format.
+//
+// 2. It tries to open the specified file in read - only mode.
+// - If the file cannot be opened, it logs a warning with details including the
+//  filename in JSON format and returns an empty `QByteArray`.
+// - If the file is successfully opened, it reads all contents and returns it as
+//  a `QByteArray`.
+// 
+// 3. If any exception occurs during the reading process, it logs a warning with
+//  details including the filename in JSON format and returns an empty `QByteArray`.
+
+// Error handling is implemented using JSON-formatted logging and try - catch blocks.
+// It makes use of utility functions such as `alias` and `FileNameJSON` 
+// for file handling and logging purposes respectively.
 
 QByteArray XFile::readBinary(const QString& filename)
 {
@@ -425,6 +445,14 @@ QByteArray XFile::readBinary(const QString& filename)
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
 
+// This source code defines a method `readBinaryCache` in the `XFile` class
+// that takes a filename (as a `QString`) as input and returns a reference
+// to a `QByteArray`. Inside the method, it checks if tracing is enabled for 
+// the "FILE" category using the `XInject::isTrace` method. If tracing is enabled,
+// it logs a trace message with various details, including the filename, 
+// using the `X_LOGJSON` macro. Finally, it reads the binary data associated
+// with the alias of the input filename from `XFileCache` and returns it.
+
 const QByteArray& XFile::readBinaryCache(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -445,6 +473,29 @@ const QByteArray& XFile::readBinaryCache(const QString& filename)
 // Params:  const QString& filename
 // Params:  const QByteArray& data
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method `writeBinary` in the `XFile` class which 
+// writes binary data to a specified file either concurrently or in a single
+//  thread based on the value of the `run` parameter. 
+
+// 1. Initially, it logs a trace message if the "FILE" trace flag is active
+//  in the `XInject` class.
+// 
+// 2. If the `run` parameter is true, it attempts to write the data concurrently 
+// using a lambda function passed to the `concurrent` function.It creates a file
+//  with the given filename, opens it in write - only mode, and writes the data to it.
+// 
+// If any step fails, appropriate warnings are logged.This branch returns true,
+//  irrespective of whether the write succeeded or not.
+// 
+// 3. If the `run` parameter is false, it performs the write operation in a single
+//  thread with similar steps to the concurrent branch, but this time returning false
+//  if the operation fails at any step, and true only if the write succeeds successfully.
+
+// Throughout the method, it uses functionalities like logging(`X_LOGJSON`, `X_WARNINGJSON`)
+//  and filename aliasing(`alias`) and creates necessary file paths(`mkFilePath`) 
+// using helper methods and classes(`XFileBlock`, `XInject`) which are presumably defined
+//  elsewhere in the code base.
 
 bool XFile::writeBinary(const QString& filename, const QByteArray& data, bool run)
 {
@@ -517,8 +568,33 @@ bool XFile::writeBinary(const QString& filename, const QByteArray& data, bool ru
 // Params:  const QString& filename
 // Params:  const QByteArray& data
 // Params:  bool run
-// Params:  
 //----------------------------------------------------------------------------- 
+
+// This script defines a function `appendBinary` in the `XFile` class that
+// appends binary data to a file. The function accepts the following parameters:
+// `filename` (the name of the file to append data to), `data` 
+// (the binary data to append), `run` (a flag indicating whether to perform
+// the operation in a concurrent manner), and `ignorelog` (a flag that, if 
+// set to true, prevents logging of warnings).
+
+// Here is the summary of each section of the code :
+
+// 1. If tracing is enabled for "FILE" through `XInject: : isTrace`, it logs
+// a trace message with various details including the filename.
+// 2. If the `run` parameter is true, it initiates a concurrent operation
+// which does the following :
+// -It creates an `XFileBlock` instance with the alias of the filename and 
+// a flag set to true.
+// - It tries to create the path to the file using `mkFilePath`.
+// - It then tries to open the file in append mode and writes the data to it.
+// If any operation fails and `ignorelog` is false, it logs a warning message.
+// 3. If the `run` parameter is false, it performs the same operations as in 
+// the concurrent block but in a synchronous manner.
+
+// Note that the function returns `true` if the operations are initiated 
+// successfully(in concurrent mode) or completed successfully
+// (in synchronous mode), and `false` otherwise.
+
 
 bool XFile::appendBinary(const QString& filename, const QByteArray& data, bool run, bool ignorelog)
 {
@@ -605,6 +681,15 @@ bool XFile::appendBinary(const QString& filename, const QByteArray& data, bool r
 // Params:  
 //----------------------------------------------------------------------------- 
 
+// The function `readDocument` is a method in the `XFile` class that takes a
+//  filename (as a QString type) as an argument and returns a `QJsonDocument`.
+//  Inside the function, it first checks if tracing for "FILE" is enabled using
+//  `XInject::isTrace("FILE")`. If tracing is enabled, it logs some trace
+//  information including the filename in JSON format using a custom log 
+// function `X_LOGJSON`. Finally, it reads the binary content of the specified
+//  file using `readBinary(filename)` and converts it to a `QJsonDocument` 
+// object using `QJsonDocument::fromJson` before returning it.
+
 QJsonDocument XFile::readDocument(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -625,6 +710,23 @@ QJsonDocument XFile::readDocument(const QString& filename)
 // Params:  const QString& filename
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method named "readDocumentCache" within the XFile
+//  class, which takes a QString reference named "filename" as a parameter and 
+// returns a reference to a QJsonDocument.
+
+// Inside the method :
+
+// 1. It first checks if "FILE" is a trace within XInject class using the
+//  "isTrace" method.
+// 
+// 2. If the trace condition is true, it logs a message with various parameters 
+// including the "filename" (processed by FileNameJSON function) through the
+//  X_LOGJSON macro.
+// 
+// 3. It then returns the result of calling the "read" method from the XFileCache 
+// class, passing an alias of the "filename" as a parameter.
+
 const QJsonDocument& XFile::readDocumentCache(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -647,6 +749,16 @@ const QJsonDocument& XFile::readDocumentCache(const QString& filename)
 // Params:  bool run
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method called "writeDocument" within the "XFile"
+//  class that accepts three parameters: a filename (as a QString), 
+// data (as a QJsonDocument), and a boolean called "run". Inside the method,
+//  it first checks if the trace for "FILE" is active using the "XInject::isTrace"
+//  method. If it is active, it logs some information using "X_LOGJSON".
+//  Afterwards, it calls another method named "writeBinary", passing the filename
+// , the JSON representation of the data, and the "run" boolean as arguments
+// , and returns the result of this "writeBinary" method call.
+
 bool XFile::writeDocument(const QString& filename, const QJsonDocument& data, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -666,6 +778,32 @@ bool XFile::writeDocument(const QString& filename, const QJsonDocument& data, bo
 // Method:  readDocumentMap
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method in the XFile class called `readDocumentMap`,
+//  which takes a filename (as a QString) as an argument and returns a nested
+//  QMap containing QString keys and QVariant values. Here's a brief summary
+//  of its functionality in English:
+
+// 1. It first checks if the "FILE" trace is active in the `XInject` class;
+//  if true, it logs a JSON message with the details of the file being accessed.
+//
+// 2. It reads a JSON document from the specified filename using another
+//  method in the XFile class : `readDocument`.
+// 
+// 3. It initializes an empty nested QMap to store the results.
+// 
+// 4. If the read document is empty, it immediately returns the empty map.
+// 
+// 5. If the document contains a JSON object, it iterates through all the 
+// keys in the root JSON object.
+// 
+// 6. For each key that maps to a JSON object, it iterates through the
+//  child keys and maps them, along with their respective
+//  values(converted to QVariant), into the nested QMap.
+// 
+// 7. The populated map is then returned.
+
+
 QMap<QString, QMap<QString, QVariant>> XFile::readDocumentMap(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -711,6 +849,18 @@ QMap<QString, QMap<QString, QVariant>> XFile::readDocumentMap(const QString& fil
 // Method:  readDocumentMapCache
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
+
+// This code defines a function `readDocumentMapCache` in the `XFile` class 
+// that takes a filename as input and returns a nested QMap structure.
+//  Initially, it performs a trace log if the "FILE" tracing is enabled.
+//  Then, it reads a JSON document from the cache using the given filename. 
+
+// The function proceeds to parse the JSON document.If the document is empty,
+//  it returns an empty map.If the document is a JSON object, it iterates 
+// over its keys and, for each key pointing to a JSON object, it iterates 
+// over its keys to build a nested map with the respective values.
+// This nested map is then returned.
+
 QMap<QString, QMap<QString, QVariant>> XFile::readDocumentMapCache(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -753,6 +903,28 @@ QMap<QString, QMap<QString, QVariant>> XFile::readDocumentMapCache(const QString
 // Params:  const QMap<QString, QMap<QString, QVariant>>& data
 // Params:  bool run
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method in the `XFile` class named
+// `writeDocumentMap` which takes three parameters: a filename (as a QString),
+// a nested QMap structure containing data, and a boolean named "run". 
+// Inside the method, it first checks if the trace for "FILE" is active 
+// using `XInject::isTrace("FILE")`, and if so, logs some information 
+// using `X_LOGJSON`.
+
+// Afterwards, it creates a QJsonObject named `rootobj` and iterates over 
+// the keys of the input data map.Inside this loop, it creates another
+// QJsonObject named `jsonobj` and iterates over the keys of the inner
+// map(associated with the current key in the outer loop), inserting 
+// each key - value pair from the inner map into `jsonobj` (converting
+// the value to a JSON value in the process).After processing all keys
+// in the inner map, it inserts the `jsonobj` into `rootobj` with the 
+// current key from the outer loop as the key.
+
+// Finally, it creates a QJsonDocument with `rootobj` as the content,
+// and calls another method named `writeDocument` with the filename, 
+// the created QJsonDocument, and the "run" parameter, and 
+// returns the result of that method call.
+
 bool XFile::writeDocumentMap(const QString& filename, const QMap<QString, QMap<QString, QVariant>>& data, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -790,6 +962,16 @@ bool XFile::writeDocumentMap(const QString& filename, const QMap<QString, QMap<Q
 // Params:  const QString& filename
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// This code defines a function `readList` in the `XFile` class that takes a 
+// filename as a parameter (of type `QString`) and returns a QStringList.
+// Inside the function, it first checks if tracing for "FILE" is enabled
+// using the `XInject::isTrace` method. If tracing is enabled, it logs a 
+// trace message using the `X_LOGJSON` macro, which logs the event with
+// various details including a JSON representation of the filename. 
+// Finally, it calls another function `read` with the `QStringList` as 
+// the template argument and the filename as the parameter, and returns the result.
+
 QStringList XFile::readList(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -955,6 +1137,16 @@ QSet<QString> XFile::readSetCache(const QString& filename)
 // Params:  const QSet<QString>& data
 // Params:  bool run
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method named "writeSet" in the "XFile" class that 
+// takes three parameters: a filename (as a QString reference), a set of
+// QString data, and a boolean named "run". Inside the method, it first 
+// checks if tracing is enabled for "FILE" using the "isTrace" method from 
+// the "XInject" class. If tracing is enabled, it logs a JSON formatted message
+// with various details including the filename. Finally, the method calls 
+// another write method with the specified filename, data, and run parameters
+// and returns its result.
+
 bool XFile::writeSet(const QString& filename, const QSet<QString>& data, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -975,6 +1167,32 @@ bool XFile::writeSet(const QString& filename, const QSet<QString>& data, bool ru
 // Params:  const QString& srcfilename
 // Params:  const QString& dstfilename
 //----------------------------------------------------------------------------- 
+
+// This source code defines a `copy` method in the `XFile` class that takes 
+// three parameters: `srcfilename` (source file name), `dstfilename` 
+// (destination file name), and `run` (a boolean indicating whether to
+//  perform the copy operation concurrently).
+
+// 1. Initially, it checks if the `FILE` trace is active using 
+// `XInject::isTrace("FILE")`, and if true, logs a JSON - formatted 
+// message using `X_LOGJSON`.
+
+// 2. Then it performs several validations :
+// -If `srcfilename` is empty, it returns false.
+// - It gathers information about the source and destination 
+// files(`srcinfo` and `dstinfo`) and refreshes this info.If the files have
+//  the same last modified date, birth time, and size, it logs a warning and 
+// returns false indicating that the copy was skipped.
+// 	- If the source file does not exist, it logs another warning and returns 
+// false.
+
+// 	3. If the `run` parameter is true, it performs the copy operation 
+// concurrently within a lambda function passed to the `concurrent` function.
+// If an exception occurs during the copy, it logs a warning.
+
+// 	4. If the `run` parameter is false, it performs the copy operation 
+// synchronously, also logging a warning in case of a failure.
+
 
 bool XFile::copy(const QString& srcfilename, const QString& dstfilename, bool run)
 {
@@ -1059,6 +1277,28 @@ bool XFile::copy(const QString& srcfilename, const QString& dstfilename, bool ru
 // Params:  bool run
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// The given source code defines a method named `rename` in the `XFile` 
+// class which takes three arguments: `srcfilename` (source filename), 
+// `dstfilename` (destination filename), and `run` (although `run` is 
+// not used in the function). The method returns a boolean value indicating
+//  the success or failure of the rename operation.
+
+// 1. Initially, it checks if the "FILE" trace is enabled using
+// `XInject::isTrace("FILE")`. If enabled, it logs a trace message using `X_LOGJSON`.
+
+// 2. It then creates two instances of `XFileBlock`, `srcblock` and `dstblock`,
+// representing the source and destination file blocks respectively, with the
+// alias of the respective filenames.
+
+// 3. Before attempting to rename the file, it checks if the source file 
+// exists using the `exists` method.If the source file does not exist, it
+// logs a warning message and returns false.
+
+// 4. It then attempts to rename the file using `QFile::rename`. If the
+// renaming succeeds, it returns true, otherwise, it catches any exception,
+// logs a warning message, and returns false.
+
 bool XFile::rename(const QString& srcfilename, const QString& dstfilename, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -1097,6 +1337,45 @@ bool XFile::rename(const QString& srcfilename, const QString& dstfilename, bool 
 // Params:  bool run
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// The source code defines a method named `move` in the `XFile` class that
+//  attempts to move a file from a source path (`srcfilename`) to a destination
+//  path (`dstfilename`). Here's a brief summary of each segment of the code:
+
+// 1. It starts with checking whether tracing for "FILE" is enabled using
+//  `XInject::isTrace("FILE")`. If enabled, it logs a JSON message with the
+//  details of the operation.
+
+// 2. If the source filename is empty, it immediately returns false,
+//  indicating failure.
+
+// 3. It then gathers information about both the source and destination
+//  files using `QFileInfo` objects, and refreshes this information.
+
+// 4. It checks if the last modified time, birth time, and size of both
+//  files are identical.If they are, it returns false to avoid unnecessary
+//  file operations.
+
+// 5. It checks whether the source file exists using the `exists` method.
+// If not, it logs a warning message and returns false.
+
+// 6. Depending on the value of the `run` parameter, it proceeds with the
+//  file move operation either concurrently or sequentially.In both cases,
+//  it performs the following operations :
+// -Acquires file blocks for both the source and destination files.
+// - Attempts to create the destination file path using `mkFilePath`.
+// - Copies the source file to the destination path using `QFile::copy`.
+// - Removes the original source file using `QFile::remove`.
+
+// 7. If an exception occurs during the file move operations, it logs
+//  a warning message and returns false to indicate failure.Otherwise,
+//  it returns true to indicate success.
+
+// It's important to note that the code uses lambdas and concurrency to
+//  potentially perform the move operation in a separate thread when the 
+// `run` parameter is true. This is intended to prevent the move operation
+//  from blocking the main thread.
+
 bool XFile::move(const QString& srcfilename, const QString& dstfilename, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -1176,6 +1455,36 @@ bool XFile::move(const QString& srcfilename, const QString& dstfilename, bool ru
 // Params:  bool run
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// This C++ function `XFile::remove` is a member of the `XFile` class and 
+// takes two parameters: a QString reference `filename` and a boolean `run`.
+//  Initially, it checks if a trace flag for "FILE" is active and if so,
+//  logs a trace message. It then verifies if the file, determined by 
+// aliasing the filename, exists; if not, it logs a warning message and 
+// returns false.
+
+// Depending on the value of the `run` parameter, it proceeds to delete 
+// the file either concurrently or not:
+
+// 1. If `run` is true:
+// -A concurrent task is initiated to remove the file.
+// - Inside the concurrent task, it creates a `XFileBlock` instance
+//  and attempts to remove the file(both alias and actual file).
+// - If any exception occurs during the removal, it logs a warning
+//  message.
+// - Regardless of whether the removal was successful or not, the function
+//  will return true.
+
+// 2. If `run` is false:
+// -Similar to when `run` is true, but the removal is done 
+// synchronously(not in a separate task).
+// - If the removal succeeds, it returns the result of `QFile::remove`.
+// - If an exception occurs, it logs a warning message and returns false.
+
+// Notably, there are a couple of commented lines at the beginning
+//  of the function, potentially for stack tracing and parameter
+//  logging which are currently disabled.
+
 bool XFile::remove(const QString& filename, bool run)
 {
 	if (XInject::isTrace("FILE"))
@@ -1238,6 +1547,14 @@ bool XFile::remove(const QString& filename, bool run)
 // Params:  bool run
 //----------------------------------------------------------------------------- 
 
+// The given code defines a method in the `XFile` class that tries to remove 
+// a list of files specified in the "filenames" parameter.It iterates over 
+// each filename in the list and tries to remove it using the `XFile: :remove` method.
+// If any of the removal operations fail(returns false), it updates the `ret` 
+// variable to false.At the end of the method, it returns the `ret` variable.
+// If all files are removed successfully, it returns true, otherwise it returns false.
+// The "run" parameter is passed to the `XFile::remove` method for each file.
+
 bool XFile::remove(const QStringList& filenames, bool run)
 {
 	bool ret = true;
@@ -1256,6 +1573,35 @@ bool XFile::remove(const QStringList& filenames, bool run)
 // Method:  unique
 // Params:  const QString& filename
 //----------------------------------------------------------------------------- 
+
+// This source code defines a function named "unique" in the "XFile" 
+// class that takes a QString reference named "filename" as a
+//  parameter and returns a unique filename as a QString.
+
+// 1. Initially, it checks if a file with the given filename does not
+// exist; if true, it immediately returns the input filename.
+// 
+// 2. It extracts information about the file using QFileInfo.
+// 
+// 3. It extracts the base name(the name without the extension) of the 
+// file and stores it in "renamefilename".
+// 
+// 4. It checks if "renamefilename" contains a '_' and if found, trims 
+// the name up to the position before the last underscore.
+// 
+// 5. It initializes a "basefilename" variable to store the modified
+// base name and a "number" variable with the value 1.
+// 
+// 6. Then, in a loop, it constructs new filenames by appending a 
+// number(formatted as a 4 - digit string) to "basefilename" until
+// it finds a filename that does not exist in the specified path.
+// 
+// 7. Once a unique filename is found, it constructs the full path with the
+// unique base name and original file extension, and returns it.
+
+// The function aims to avoid file name collisions by creating a unique
+// filename through appending a number at the end of the base name.
+
 QString XFile::unique(const QString& filename)
 {
 
@@ -1291,6 +1637,13 @@ QString XFile::unique(const QString& filename)
 // Params:  const QString& filename
 // Params:  
 //----------------------------------------------------------------------------- 
+
+// This source code defines a method named `exists` in the `XFile` class.
+// It takes a constant QString reference as a parameter named `filename`.
+//  Inside the method, it calls another method named `alias`
+//  with `filename` as an argument, and then checks if a file with the 
+// resultant alias exists using `QFile::exists` method.It returns `true`
+//  if the file exists and `false` otherwise.
 
 bool XFile::exists(const QString& filename)
 {
