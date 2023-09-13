@@ -5,6 +5,13 @@
 
 #include "../../Core/CoreStorage/XFunctionInject.h"
 
+// The selected code file seems to contain a utility class XLogInject
+// that provides method implementations for logging system calls and
+// events.The class and methods can be utilized to debug the system by
+// tracking various logs and events.The purpose of this class is to
+// provide an easy - to - use logging interface that supports all
+// types of system logs and events.
+
 namespace CoreStorage
 {
 
@@ -28,6 +35,17 @@ namespace CoreStorage
 	// Context: DefaultNamespace
 	// Class:   XFunctionInject
 	// Method:  XLogInject
+	// Description:
+	//	The XLogInject class is a class that has the purpose of logging system
+	//	events and calls.It contains several methods that are related to system
+	//	logging, such as inject, hasObjectFunction, call and LogAppend.The
+	//	inject method and injects method adds logging functions to a global
+	//	m_ObjectInjects object.The hasObjectFunction method and hasObjectFunctions
+	//	method are used to check for a function named name in the global
+	//	m_ObjectInjects object.The call method and calls method both send a log
+	//	message to a file specified by the filepath.Finally, the LogAppend method
+	//	takes in a few parameters and appends a log message to several files
+	//	specified by the filepath
 	//----------------------------------------------------------------------------- 
 	class CORESTORAGE_EXPORT XLogInject :public  XFunctionInject<XFunctionLog>
 	{
@@ -67,6 +85,26 @@ namespace CoreStorage
 	// Context: DefaultNamespace
 	// Class:   XLogInject
 	// Method:  XLogsInject
+	// Description:
+	//	The selected code file contains a XLogsInject class with
+	//	multiple methods that are related to system logging. Here's a
+	//	brief summary of what each method does:
+	//	inject(name, function) and injects(name, function) are both
+	//		injectors for logging functions.They will add a logging function
+	//		with the given name to a global m_ObjectInjects object.
+	//	hasObjectFunction(name) and hasObjectFunctions(name) are
+	//		both used to check for a function named name in the global
+	//		m_ObjectInjects object, which is used for system logging
+	//	call(name, module, filename, line, classname, method,
+	//		event, status, jsonobj) and calls(name, module, filename,
+	//		line, classname, method, event, status, jsonobj) both
+	//		send a log message to a file specified by the filepath.
+	//		This function is used for logging system calls.
+	//	LogAppend(filepath, context, module, filename,
+	//		line, classname, method, event, status, jsonobj) takes
+	//		in a few parameters and appends a log message to several files
+	//		specified by the filepath.This function is used for logging system events.
+
 	//----------------------------------------------------------------------------- 
 
 	class CORESTORAGE_EXPORT XLogsInject :public  XFunctionInject<XFunctionLog>

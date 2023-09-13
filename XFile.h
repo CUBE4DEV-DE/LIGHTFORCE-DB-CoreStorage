@@ -1,5 +1,6 @@
 #pragma once
-//#DOC
+
+
 
 #include "CoreStorageGlobal.h"
 
@@ -18,9 +19,19 @@ namespace CoreStorage
 // Date:    02.10.2022
 // Context: DefaultNamespace
 // Class:   XFile
-// Method:  XFile
+// Description:
+//	This XFile file contains a CoreStorage namespace, which is a collection of
+//	functions for managing files and their contents including reading and writing
+//	different types of data, such as raw Text(QString), UNICODE-Text,
+//	QJsonDocument, QByteArray, QStringList, QMap<QString, QString>,
+//	and QSet<QString>.The functions also allow for compressing
+//	and encrypting data, as well as copying, renaming, moving, and deleting files.
+//	There is also a concurrent function for executing a given function in parallel.
+//	The XFile class includes static methods to perform these various functions.
+//	The file has a template that can be used as a base to create your file and
+//	Description is left as blank, allowing developers to provide context.
 //----------------------------------------------------------------------------- 
-	
+
 class CORESTORAGE_EXPORT XFile
 {
 public:
@@ -127,6 +138,16 @@ private:
 // Params:  const QString& filename
 // Params:  const T& data
 // Params:  bool run
+// Description:
+//			This is a method of the XFile class which is designed to write
+//			data to a file specified by the filename parameter. The T parameter
+//			is a template type, which should match the type of the data to be
+//			written to the file. The data parameter represents the actual data
+//			to be written to the file. The run parameter is a boolean value that
+//			determines whether the written data should be run as a program. If
+//			run is set to true, then the written data will be executed as a
+//			program. Additionally, the T type should be serializable or supply
+//			an overload for the << operator.
 //----------------------------------------------------------------------------- 
 template <class T>
 bool XFile::write(const QString& filename, const T& data, bool run)
@@ -149,6 +170,16 @@ bool XFile::write(const QString& filename, const T& data, bool run)
 // Class:   XFile
 // Method:  read
 // Params:  const QString& filename
+// Description:
+//	The read method is static a member function of the XFile class.
+//	This template method accepts a QString parameter called filename which
+//	is the path and name of the file that is to be read. It returns an
+//	object of type T, which must be specified when calling this method.
+//	This method reads the contents of a file with the specified filename
+//	and returns it as an object of type T.The read method can be further
+//	customized for various file formats.When used, the filename should
+//	contain the full file path or be a relative path from the
+//	current working directory.
 //----------------------------------------------------------------------------- 
 template <class T>
 T XFile::read(const QString& filename)
@@ -170,6 +201,13 @@ T XFile::read(const QString& filename)
 // Class:   XFile
 // Method:  readCache
 // Params:  const QString& filename
+// Description:
+//	This is a method of the XFile class which is designed to read
+//	cache data from a file specified by the filename parameter.
+//	The method returns a value of type T, which is the template 
+//	specified by the developer. The T type should match the type
+//	of the data to be read from the file. The QString parameter is
+//	used to specify the file name.
 //----------------------------------------------------------------------------- 
 
 template <class T>

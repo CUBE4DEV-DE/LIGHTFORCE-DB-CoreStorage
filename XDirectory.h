@@ -10,6 +10,20 @@
 #include <QDir>
 #include <QtConcurrent>
 
+// The overall purpose of the file, is to provide a class called XDirectory with various
+// methods that define copy, diff, merge, compress, decompress, encrypt, and remove
+// operations. These operations are generally used to manipulate directories and
+// their contents.
+// The methods take source and destination directories, filtering options, and
+// time ranges for selected files as parameters.Most of the operations are recursive,
+// meaning they copy or diff all directories and files within the source directory,
+// preserving their original file names and paths.There are also various means of
+// filtering files in the operations, which could be useful in selecting particular
+// file types or limiting the scope of operations.
+// Overall, XDirectory offers a versatile set of tools for developers working
+// with directories, making it easier to move, manipulate, and clean up
+// directory structures.
+
 namespace CoreStorage
 {
 //-----------------------------------------------------------------------------
@@ -19,6 +33,13 @@ namespace CoreStorage
 // Context: DefaultNamespace
 // Class:   XDirectory
 // Method:  XDirectory
+// Description :
+//	The purpose of these methods is to copy directories and their contents
+//	to another location. They take various parameters such as the source
+//	and destination directories, filtering options, and time ranges for
+//	selected files. The methods use recursion to copy all directories and
+//	files within the source directory. The copied contents will maintain
+//	their original file names and paths.
 //----------------------------------------------------------------------------- 
 	
 class CORESTORAGE_EXPORT XDirectory

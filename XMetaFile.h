@@ -18,6 +18,13 @@ namespace CoreStorage
 // Context: DefaultNamespace
 // Class:   XMetaFile
 // Method:  XMetaFile
+// Description:
+//	Sure, the purpose of these methods is to check if a specific user, group,
+//	and role have access(either read or write) to a given file.Depending
+//	on the specific method, it receives different parameters, such as
+//	filename, user, group, role, and password.Each method returns a
+//	boolean value that indicates whether the user has the requested
+//	type of access.
 //----------------------------------------------------------------------------- 
 
 class CORESTORAGE_EXPORT XMetaFile  : public QObject

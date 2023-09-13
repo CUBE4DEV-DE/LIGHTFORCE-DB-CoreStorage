@@ -6,6 +6,9 @@
 #include <QSystemSemaphore>
 #include <QJsonDocument>
 
+namespace CoreStorage
+{
+
 //-----------------------------------------------------------------------------
 // Author:  Tobias Post
 // Company: CUBE4DEV GmbH
@@ -13,6 +16,19 @@
 // Context: DefaultNamespace
 // Class:   XCache
 // Method:  XCache
+// Description:
+//	There are multiple methods in this file, each with its own specific task
+//	to optimize access to the contents of files.
+//	fill fills an XFileCache instance with the contents of a text file.
+//	fillBinary fills an XFileCache instance with the contents of a binary file.
+//	fillDocument fills an XFileCache instance with a QJsonDocument instance that
+//	contains the contents of a JSON or binary file.
+//	isChanged checks if the contents of the file have changed since the
+//	last read.size returns the size of the contents of the file.
+//	The read, readBinary, and readDocument methods access the files in the
+//	cache and reload the contents of the file if necessary.Caching enables
+//	faster file access since the contents of the file do not have to be read
+//	from the storage drive every time.
 //----------------------------------------------------------------------------- 
 class CORESTORAGE_EXPORT XFileCache
 {
@@ -51,4 +67,8 @@ class CORESTORAGE_EXPORT XFileCache
 	static QCache<QString, XFileCache> m_BinaryCache;
 	static QCache<QString, XFileCache> m_DocumentCache;
 };
+
+
+};
+using namespace CoreStorage;
 

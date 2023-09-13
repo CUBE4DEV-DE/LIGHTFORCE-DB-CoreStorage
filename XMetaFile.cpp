@@ -14,6 +14,11 @@ qint32 XMetaFile::m_MaxTouch=1024;
 // Params:  const QString& user
 // Params:  const QString& group
 // Params:  const QString& role
+// Description:
+//	This method checks if a specific user, group, and role have access to
+//	the given file. The method takes a filename string, user string,
+//	group string, role string, and password string as parameters.
+//	It returns a boolean value indicating whether the user has read or write access.
 //----------------------------------------------------------------------------- 
 bool XMetaFile::access(const QString& filename, const QString& user, const QString& group, const QString& role, const QString& password)
 {
@@ -31,6 +36,11 @@ bool XMetaFile::access(const QString& filename, const QString& user, const QStri
 // Params:  const QStringList& users
 // Params:  const QStringList& groups
 // Params:  const QStringList& roles
+// Description:
+//	This method is similar to the previous one, but it receives the
+//	lists of users, groups and roles instead.It takes the same parameters
+//	as before, as well as the passwords string list.It returns a boolean
+//	value indicating whether the user has read or write access.
 //----------------------------------------------------------------------------- 
 bool XMetaFile::access(const QString& filename, const QStringList& users, const QStringList& groups,const QStringList& roles, const QStringList& passwords)
 {
@@ -61,6 +71,11 @@ bool XMetaFile::access(const QString& filename, const QStringList& users, const 
 // Params:  const QString& user
 // Params:  const QString& group
 // Params:  const QString& role
+// Description:
+// This method checks if a specific user, group, and role have read access
+// to the given file.The method takes a filename string, user string,
+// group string, role string, and password string as parameters.
+// It returns a boolean value indicating whether the user has read access.
 //----------------------------------------------------------------------------- 
 bool XMetaFile::isAccess(const QString& filename, const QString& user, const QString& group, const QString& role, const QString& password)
 {
@@ -103,6 +118,11 @@ bool XMetaFile::isAccess(const QString& filename, const QString& user, const QSt
 // Params:  const QString& group
 // Params:  const QString& role
 // Params:  const QString& password
+// Description:
+//	This method is similar to the previous one, but it only checks if the
+//	user has read access to the file.It receives the same parameters
+//	as before.It returns a boolean value indicating whether the
+//	user has read access.
 //----------------------------------------------------------------------------- 
 bool XMetaFile::isAccessRead(const QString& filename, const QString& user, const QString& group, const QString& role,const QString& password)
 {
@@ -145,6 +165,11 @@ bool XMetaFile::isAccessRead(const QString& filename, const QString& user, const
 // Params:  const QString& group
 // Params:  const QString& role
 // Params:  const QString& password
+// Description:
+//	This method checks if a specific user, group, and role have write access
+//	to the given file.The method takes a filename string, user string,
+//	group string, role string, and password string as parameters.
+//	It returns a boolean value indicating whether the user has write access.
 //----------------------------------------------------------------------------- 
 bool XMetaFile::isAccessWrite(const QString& filename, const QString& user, const QString& group, const QString& role,const QString& password)
 {

@@ -21,6 +21,7 @@
 // Context: DefaultNamespace
 // Class:   XFile
 // Method:  m_Futures
+// Description: 
 //----------------------------------------------------------------------------- 
 
 QList<QFuture<void> > XFile::m_Futures;
@@ -33,7 +34,8 @@ QList<QFuture<void> > XFile::m_Futures;
 // Class:   XFile
 // Method:  alias
 // Params:  const QString& filename
-//----------------------------------------------------------------------------- 
+// Description:
+// ----------------------------------------------------------------------------- 
 
 // This C++ function, named "alias", is a member of the "XFile" class.It takes a 
 // "filename" parameter as a QString reference and simply returns the result of the
@@ -55,7 +57,8 @@ QString XFile::alias(const QString& filename)
 // Method:  alias
 // Params:  const QString& filename
 // Params:  const QString& alias
-//----------------------------------------------------------------------------- 
+// Description:
+// ----------------------------------------------------------------------------- 
 
 // This "alias" method is part of the "XFile" class and takes two QString references 
 // as parameters : "filename" and "alias".Initially,  it checks if both strings are empty,
@@ -85,6 +88,7 @@ void XFile::alias(const QString& filename, const QString& alias)
 // Class:   XFile
 // Method:  readFile
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This "read" function, part of the "XFile" class, takes a filename as an input
@@ -137,6 +141,7 @@ QString XFile::read(const QString& filename)
 // Class:   XFile
 // Method:  readCache
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This function, named "readCache", is part of the "XFile" class and takes a
@@ -165,7 +170,7 @@ const QString& XFile::readCache(const QString& filename)
 // Method:  writeFile
 // Params:  const QString& filename
 // Params:  const QString& content
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method `XFile::write` in C++ that takes three
@@ -264,6 +269,7 @@ bool XFile::write(const QString& filename, const QString& content, bool run)
 // Params:  const QString& filename
 // Params:  const QString& content
 // Params:  bool run
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This script defines a method named `append` within the `XFile` class that
@@ -384,6 +390,7 @@ bool XFile::append(const QString& filename, const QString& content, bool run, bo
 // Class:   XFile
 // Method:  readBinary
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
 
 //This source code defines a method named `readBinary` in the `XFile` class
@@ -443,6 +450,7 @@ QByteArray XFile::readBinary(const QString& filename)
 // Class:   XFile
 // Method:  readBinaryCache
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method `readBinaryCache` in the `XFile` class
@@ -472,6 +480,7 @@ const QByteArray& XFile::readBinaryCache(const QString& filename)
 // Method:  writeBinary
 // Params:  const QString& filename
 // Params:  const QByteArray& data
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method `writeBinary` in the `XFile` class which 
@@ -568,6 +577,7 @@ bool XFile::writeBinary(const QString& filename, const QByteArray& data, bool ru
 // Params:  const QString& filename
 // Params:  const QByteArray& data
 // Params:  bool run
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This script defines a function `appendBinary` in the `XFile` class that
@@ -678,7 +688,7 @@ bool XFile::appendBinary(const QString& filename, const QByteArray& data, bool r
 // Class:   XFile
 // Method:  readDocument
 // Params:  const QString& filename
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // The function `readDocument` is a method in the `XFile` class that takes a
@@ -708,7 +718,7 @@ QJsonDocument XFile::readDocument(const QString& filename)
 // Class:   XFile
 // Method:  readDocumentCache
 // Params:  const QString& filename
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method named "readDocumentCache" within the XFile
@@ -747,7 +757,7 @@ const QJsonDocument& XFile::readDocumentCache(const QString& filename)
 // Params:  const QString& filename
 // Params:  const QJsonDocument& data
 // Params:  bool run
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method called "writeDocument" within the "XFile"
@@ -777,6 +787,7 @@ bool XFile::writeDocument(const QString& filename, const QJsonDocument& data, bo
 // Class:   XFile
 // Method:  readDocumentMap
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method in the XFile class called `readDocumentMap`,
@@ -848,6 +859,7 @@ QMap<QString, QMap<QString, QVariant>> XFile::readDocumentMap(const QString& fil
 // Class:   XFile
 // Method:  readDocumentMapCache
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This code defines a function `readDocumentMapCache` in the `XFile` class 
@@ -902,6 +914,7 @@ QMap<QString, QMap<QString, QVariant>> XFile::readDocumentMapCache(const QString
 // Params:  const QString& filename
 // Params:  const QMap<QString, QMap<QString, QVariant>>& data
 // Params:  bool run
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method in the `XFile` class named
@@ -960,7 +973,7 @@ bool XFile::writeDocumentMap(const QString& filename, const QMap<QString, QMap<Q
 // Class:   XFile
 // Method:  readList
 // Params:  const QString& filename
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This code defines a function `readList` in the `XFile` class that takes a 
@@ -990,7 +1003,7 @@ QStringList XFile::readList(const QString& filename)
 // Class:   XFile
 // Method:  readListCache
 // Params:  const QString& filename
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 QStringList XFile::readListCache(const QString& filename)
 {
@@ -1012,6 +1025,7 @@ QStringList XFile::readListCache(const QString& filename)
 // Params:  const QString& filename
 // Params:  const QStringList& data
 // Params:  bool run
+// Description:
 //----------------------------------------------------------------------------- 
 bool XFile::writeList(const QString& filename, const QStringList& data, bool run)
 {
@@ -1032,7 +1046,7 @@ bool XFile::writeList(const QString& filename, const QStringList& data, bool run
 // Class:   XFile
 // Method:  readMap
 // Params:  const QString& filename
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 QMap<QString,QString> XFile::readMap(const QString& filename)
@@ -1053,7 +1067,7 @@ QMap<QString,QString> XFile::readMap(const QString& filename)
 // Class:   XFile
 // Method:  readMapCache
 // Params:  const QString& filename
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 QMap<QString,QString> XFile::readMapCache(const QString& filename)
@@ -1076,6 +1090,7 @@ QMap<QString,QString> XFile::readMapCache(const QString& filename)
 // Params:  const QString& filename
 // Params:  const QMap<QString, QString>& data
 // Params:  bool run
+// Description:
 //----------------------------------------------------------------------------- 
 bool XFile::writeMap(const QString& filename, const QMap<QString, QString>& data, bool run)
 {
@@ -1096,6 +1111,7 @@ bool XFile::writeMap(const QString& filename, const QMap<QString, QString>& data
 // Class:   XFile
 // Method:  readSet
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
 QSet<QString> XFile::readSet(const QString& filename)
 {
@@ -1115,7 +1131,10 @@ QSet<QString> XFile::readSet(const QString& filename)
 // Class:   XFile
 // Method:  readSetCache
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
+
+
 QSet<QString> XFile::readSetCache(const QString& filename)
 {
 	if (XInject::isTrace("FILE"))
@@ -1136,16 +1155,30 @@ QSet<QString> XFile::readSetCache(const QString& filename)
 // Params:  const QString& filename
 // Params:  const QSet<QString>& data
 // Params:  bool run
+// Description:
 //----------------------------------------------------------------------------- 
 
-// This source code defines a method named "writeSet" in the "XFile" class that 
-// takes three parameters: a filename (as a QString reference), a set of
-// QString data, and a boolean named "run". Inside the method, it first 
-// checks if tracing is enabled for "FILE" using the "isTrace" method from 
-// the "XInject" class. If tracing is enabled, it logs a JSON formatted message
-// with various details including the filename. Finally, the method calls 
-// another write method with the specified filename, data, and run parameters
-// and returns its result.
+// This source code defines a method `writeSet` in the `XFile` class which 
+// writes a set of strings to a specified file either concurrently or in a single
+// thread based on the value of the `run` parameter. 
+// 1. Initially, it logs a trace message if the "FILE" trace flag is active
+//  in the `XInject` class.
+// 
+// 2. If the `run` parameter is true, it attempts to write the data concurrently 
+// using a lambda function passed to the `concurrent` function.It creates a file
+//  with the given filename, opens it in write - only mode, and writes the data to it.
+// 
+// If any step fails, appropriate warnings are logged.This branch returns true,
+//  irrespective of whether the write succeeded or not.
+// 
+// 3. If the `run` parameter is false, it performs the write operation in a single
+//  thread with similar steps to the concurrent branch, but this time returning false
+//  if the operation fails at any step, and true only if the write succeeds successfully.
+// Throughout the method, it uses functionalities like logging(`X_LOGJSON`, `X_WARNINGJSON`)
+//  and filename aliasing(`alias`) and creates necessary file paths(`mkFilePath`) 
+// using helper methods and classes(`XFileBlock`, `XInject`) which are presumably defined
+//  elsewhere in the code base.
+//  takes three parameters: a filename (as a `QString`), a set of strings
 
 bool XFile::writeSet(const QString& filename, const QSet<QString>& data, bool run)
 {
@@ -1166,6 +1199,7 @@ bool XFile::writeSet(const QString& filename, const QSet<QString>& data, bool ru
 // Method:  copyFile
 // Params:  const QString& srcfilename
 // Params:  const QString& dstfilename
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a `copy` method in the `XFile` class that takes 
@@ -1275,7 +1309,7 @@ bool XFile::copy(const QString& srcfilename, const QString& dstfilename, bool ru
 // Params:  const QString& srcfilename
 // Params:  const QString& dstfilename
 // Params:  bool run
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // The given source code defines a method named `rename` in the `XFile` 
@@ -1335,7 +1369,7 @@ bool XFile::rename(const QString& srcfilename, const QString& dstfilename, bool 
 // Params:  const QString& srcfilename
 // Params:  const QString& dstfilename
 // Params:  bool run
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // The source code defines a method named `move` in the `XFile` class that
@@ -1453,7 +1487,7 @@ bool XFile::move(const QString& srcfilename, const QString& dstfilename, bool ru
 // Method:  removeFile
 // Params:  const QString& filename
 // Params:  bool run
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This C++ function `XFile::remove` is a member of the `XFile` class and 
@@ -1545,6 +1579,7 @@ bool XFile::remove(const QString& filename, bool run)
 // Method:  remove
 // Params:  const QStringList& filenames
 // Params:  bool run
+// Description:
 //----------------------------------------------------------------------------- 
 
 // The given code defines a method in the `XFile` class that tries to remove 
@@ -1572,6 +1607,7 @@ bool XFile::remove(const QStringList& filenames, bool run)
 // Class:   XFile
 // Method:  unique
 // Params:  const QString& filename
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a function named "unique" in the "XFile" 
@@ -1635,7 +1671,7 @@ QString XFile::unique(const QString& filename)
 // Class:   XFile
 // Method:  exists
 // Params:  const QString& filename
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method named `exists` in the `XFile` class.
@@ -1659,7 +1695,7 @@ bool XFile::exists(const QString& filename)
 // Method:  equal
 // Params:  const QString& filename
 // Params:  const QString& filename2
-// Params:  
+// Description:
 //----------------------------------------------------------------------------- 
 
 // This source code defines a method called "equal" in the "XFile" class that 
@@ -2253,6 +2289,7 @@ QJsonObject XFile::FileNamesJSON(const QString& srcfilename, const QString& dstf
 // Class:   XFile
 // Method:  append
 // Params:  QFuture<void>& future
+// Description:
 //----------------------------------------------------------------------------- 
 void XFile::append(QFuture<void> future)
 {
@@ -2267,8 +2304,7 @@ void XFile::append(QFuture<void> future)
 // Class:   XFile
 // Method:  mkPath
 // Params:  const QString& filename
-// Params:  
-//----------------------------------------------------------------------------- 
+// Description:
 
 // This code defines a function named "mkFilePath" in the "XFile" class, which
 // takes a string parameter "filename" and returns a boolean value. 
@@ -2288,6 +2324,8 @@ void XFile::append(QFuture<void> future)
 // it logs a warning message with the "X_WARNINGJSON" macro, which includes
 // details like "CoreStorage", "XFile", "mkFilePath", and the filename.
 // In the case of an exception, it returns false.
+
+//----------------------------------------------------------------------------- 
 
 bool XFile::mkFilePath(const QString& filename)
 {

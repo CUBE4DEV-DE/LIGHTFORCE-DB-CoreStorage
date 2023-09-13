@@ -1,5 +1,11 @@
 #pragma once
 
+// This file is called XSecret.h and it is a header file for a C++ class
+// named XSecret. The class is part of a namespace called CoreStorage.
+// The purpose of this class is to store and manage security credentials
+// with methods such as setCredential and isCredential. It also has a
+// dataPath method to set the path of the data used by the class.
+
 #include <QObject>
 
 #pragma once
