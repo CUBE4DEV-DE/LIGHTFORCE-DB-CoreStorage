@@ -8,7 +8,6 @@ access the file system must do so through CoreStorage. It maintains
 this access by providing a set of static classes and methods that 
 work with various file types.
 
-
 XFile
 -----
 This XFile file contains a collection of
@@ -48,4 +47,38 @@ The three classes: XFunctionInject, XStringInject,
 and XInject with the purpose of providing functionality for injecting and calling
 stored functions in a generic way. The main idea is to provide a template that can
 be used for defining functionality for injecting and calling stored functions.
+
+
+Advanced Storage classes
+=======================
+
+XBackup
+-------
+XBackup class, which is responsible for performing backups
+of specified directories and files. The class contains methods for setting
+data and backup paths, as well as a timer that can be scheduled for periodic
+backups. The timestamp method is responsible for creating daily backups
+with incremental backups of modified files, and the rollback method
+is used to revert to a previous version of the backup.
+
+XRepository
+-----------
+The methods in the XRepository class serve to manage the path and
+versioning of data stored within the repository.
+
+XExpire
+-------
+The purpose of the XExpire class is to manage the expiry
+of data saved to disk. It manages the path in which the data is stored
+as well as flushes any data that exceeds a specified time limit.
+
+XStream
+-------
+It is designed to help developers manage data streams and paths within their applications.
+The class can be used to set paths for data and stream locations,
+as well as manage flushing and waiting of data.
+
+XConfig
+-------
+The XConfig class is responsible for reading and writing configuration values in files. 
 
