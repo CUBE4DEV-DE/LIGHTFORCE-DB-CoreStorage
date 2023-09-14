@@ -18,8 +18,15 @@ namespace CoreStorage
 	// Company: CUBE4DEV GmbH
 	// Date:    20.10.2022
 	// Context: DefaultNamespace
-	// Class:   XRegistry
-	// Method:  XRegistry
+	// Class:   XConfig
+	// Method:  XConfig
+	// Description:  
+	//	The XConfig class is responsible for reading and writing configuration
+	//	values in files. It uses the QMap class to represent the data in multiple
+	//	nested levels, and it makes use of caching mechanisms and mutex locks to
+	//	ensure thread safety in multiple concurrent access scenarios. The class
+	//	provides methods to set and get values, as well as to retrieve all
+	//	values for a given group in a file.
 	//----------------------------------------------------------------------------- 
 	class CORESTORAGE_EXPORT XConfig
 	{

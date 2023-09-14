@@ -16,6 +16,12 @@ namespace CoreStorage
 // Context: DefaultNamespace
 // Class:   XBackup
 // Method:  XBackup
+// Description: XBackup class, which is responsible for performing backups
+//  of specified directories and files. The class contains methods for setting
+//	data and backup paths, as well as a timer that can be scheduled for periodic
+//	backups. The timestamp method is responsible for creating daily backups
+//	with incremental backups of modified files, and the rollback method
+//	is used to revert to a previous version of the backup.
 //----------------------------------------------------------------------------- 
 class CORESTORAGE_EXPORT XBackup:public QObject
 {

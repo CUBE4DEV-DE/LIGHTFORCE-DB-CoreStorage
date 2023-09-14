@@ -1,11 +1,5 @@
 #pragma once
 
-// This file is called XSecret.h and it is a header file for a C++ class
-// named XSecret. The class is part of a namespace called CoreStorage.
-// The purpose of this class is to store and manage security credentials
-// with methods such as setCredential and isCredential. It also has a
-// dataPath method to set the path of the data used by the class.
-
 #include <QObject>
 
 #pragma once
@@ -26,6 +20,13 @@ namespace CoreStorage
 // Context: DefaultNamespace
 // Class:   XSecret
 // Method:  XSecret
+// Description: The XSecret class provides functionality for storing and validating
+//	credentials(usernames and associated passwords).It achieves this by
+//	internally using the QCryptographicHash and XFile classes.This class
+//	supports setting the datapath, setting credentials, validating credentials,
+//	and generating a keyword from the input credentials.Essentially,
+//	the XSecret class is a tool for securely storing and finding usernames and
+//	their matching passwords.
 //----------------------------------------------------------------------------- 
 class CORESTORAGE_EXPORT XSecret:public QObject
 {

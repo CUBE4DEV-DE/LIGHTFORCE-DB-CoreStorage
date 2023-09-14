@@ -16,6 +16,12 @@ namespace CoreStorage
 	// Context: DefaultNamespace
 	// Class:   XExpire
 	// Method:  XExpire
+	// Description: The purpose of the XExpire class is to manage the expiry
+	//	of data saved to disk. It manages the path in which the data is stored
+	//	as well as flushes any data that exceeds a specified time limit. The
+	//	time limit and the checking interval are configurable, allowing for
+	//	effective customization of expiry policies. The class also has a
+	//	wait method that waits for any unfinished file or directory moves.
 	//----------------------------------------------------------------------------- 
 	class CORESTORAGE_EXPORT XExpire :public QObject
 	{

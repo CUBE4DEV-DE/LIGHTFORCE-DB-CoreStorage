@@ -96,13 +96,15 @@ void XFileBlock::lockWrite(const QString& keyname)
 	// Wait Stop For Read
 	m_SemaphoreRead = new QSystemSemaphore(m_Context + keyname + "R", 1, QSystemSemaphore::Open);
 	m_SemaphoreRead->acquire();
+	
+	// Start Write
+	m_SemaphoreWrite = new QSystemSemaphore(m_Context + keyname + "W", 1, QSystemSemaphore::Open);
+	m_SemaphoreWrite->acquire();
+
 	m_SemaphoreRead->release();
 	delete m_SemaphoreRead;
 	m_SemaphoreRead = Q_NULLPTR;
 
-	// Start Write
-	m_SemaphoreWrite = new QSystemSemaphore(m_Context + keyname + "W", 1, QSystemSemaphore::Open);
-	m_SemaphoreWrite->acquire();
 }
 
 //-----------------------------------------------------------------------------
@@ -120,13 +122,15 @@ void XFileBlock::lockRead(const QString& keyname)
 	// Wait Stop For Write
 	m_SemaphoreWrite = new QSystemSemaphore(m_Context + keyname + "W", 1, QSystemSemaphore::Open);
 	m_SemaphoreWrite->acquire();
+	
+	// Start Read
+	m_SemaphoreRead = new QSystemSemaphore(m_Context + keyname + "R", 1, QSystemSemaphore::Open);
+	m_SemaphoreRead->acquire();
+
 	m_SemaphoreWrite->release();
 	delete m_SemaphoreWrite;
 	m_SemaphoreWrite = Q_NULLPTR;
 
-	// Start Read
-	m_SemaphoreRead = new QSystemSemaphore(m_Context + keyname + "R", 1, QSystemSemaphore::Open);
-	m_SemaphoreRead->acquire();
 }
 
 //-----------------------------------------------------------------------------
