@@ -1,0 +1,51 @@
+
+CORESTORAGE
+===========
+CoreStorage is a module that sits at the bottom of the software
+stack and provides a foundation for all of the other modules
+to build upon. This means that any other module that needs to
+access the file system must do so through CoreStorage. It maintains
+this access by providing a set of static classes and methods that 
+work with various file types.
+
+
+XFile
+-----
+This XFile file contains a collection of
+functions for managing files and their contents including reading and writing
+different types of data, such as raw Text(QString), UNICODE-Text,
+QJsonDocument, QByteArray, QStringList, QMap<QString, QString>,
+and QSet<QString>.The functions also allow for compressing
+and encrypting data, as well as copying, renaming, moving, and deleting files.
+There is also a concurrent function for executing a given function in parallel.
+The XFile class includes static methods to perform these various functions.
+The file has a template that can be used as a base to create your file and
+Description is left as blank, allowing developers to provide context.
+
+XDirectory
+----------
+The purpose of the class XDirectory is to copy directories and their contents
+to another location. They take various parameters such as the source
+and destination directories, filtering options, and time ranges for
+selected files. The methods use recursion to copy all directories and
+files within the source directory. The copied contents will maintain
+their original file names and paths.
+
+XFileAlias
+----------
+The XFileAlias class is defined the CoreStorage-Namespace.
+This class has several static methods that allow you to set and update
+file aliases, remove file aliases, and clear the aliases entirely.
+
+XFileBlock
+----------
+The XFileBlock lock on a file identified by its key name.
+is used to specify whether the lock is for reading or writing.
+
+XInject
+-------
+The three classes: XFunctionInject, XStringInject,
+and XInject with the purpose of providing functionality for injecting and calling
+stored functions in a generic way. The main idea is to provide a template that can
+be used for defining functionality for injecting and calling stored functions.
+
